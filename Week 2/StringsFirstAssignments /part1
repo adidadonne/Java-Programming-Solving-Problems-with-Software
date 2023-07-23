@@ -1,0 +1,61 @@
+
+/**
+ * Write a description of part1 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class part1 
+{
+    public String findSimpleGene(String dna)
+    {
+        String str= "";
+        int startIndex = dna.indexOf("ATG"); // finding start codon
+        if (startIndex == -1) //if start codon does not exist return nill string
+        {
+            return "";
+        }
+        int stopIndex = dna.indexOf("TAA", startIndex+3); // finding stop codon 
+        if( stopIndex == -1) // if stop codon doesnt exist return null string
+        {
+            return "";
+        }
+        if( (stopIndex-startIndex)%3 == 0 )
+        {
+            str= dna.substring(startIndex, stopIndex+3);
+        }
+        
+        return str;
+    }
+    
+    public void testSimpleGene()
+    {
+        String dna = "";
+         // case 1 DNA with no "ATG"
+         dna = "ATCCCGTAGTTAAGC";
+         System.out.println(dna);
+         System.out.println(findSimpleGene(dna));
+         
+          // case 2 DNA with no “TAA”
+          dna= "AAATGCTGTCAATC";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna));
+          
+          // case 3 DNA with no “ATG” or “TAA”
+          dna = "AAATCTCGTACGT";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna));
+          
+          // case 4 DNA with ATG, TAA and the substring between them is a multiple of 3 (a gene)
+          dna = "ACATGTGCATGATCCTATAAGT";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna));
+          
+          // case 5 DNA with ATG, TAA and the substring between them is not a multiple of 3.
+          dna = "ACACATGATGTGATGATCTTAG";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna));
+    
+        
+    }
+}
