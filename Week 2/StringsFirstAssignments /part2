@@ -1,0 +1,66 @@
+
+/**
+ * Write a description of part2 here.
+ * 
+ * @author (Adi) 
+ * @version (a version number or a date)
+ */
+public class part2 
+{
+    
+    public String findSimpleGene(String dna, int startCodon, int stopCodon)
+    {
+        String str= "";
+        int dnaLength= dna.length(); // getting dna length
+        if (startCodon < 0 || startCodon>dnaLength-3) // checkingif start codon is invalid
+        {
+            return "";
+        }
+        // checking if start codon is invalid
+        if( stopCodon <0 || stopCodon>dnaLength-3) // if stop codon doesnt exist return null string
+        {
+            return "";
+        }
+        if( (stopCodon-startCodon)%3 == 0 )
+        {
+            str= dna.substring(startCodon, stopCodon+3);
+            str.toUpperCase() ;
+            //char [] temp= str.toCharArray();
+            //if( 
+            
+        }
+        
+        return str;
+    }
+    
+    public void testSimpleGene()
+    {
+        String dna = "";
+         // case 1 DNA with no "ATG"
+         dna = "ATCCCGTAGTTAAGC";
+         System.out.println(dna);
+         System.out.println(findSimpleGene(dna,-1,10));
+         
+          // case 2 DNA with no “TAA”
+          dna= "AAATGCTGTCAATC";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna,2,-1));
+          
+          // case 3 DNA with no “ATG” or “TAA”
+          dna = "AAATCTCGTACGT";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna,-1,-1));
+          
+          // case 4 DNA with ATG, TAA and the substring between them is a multiple of 3 (a gene)
+          dna = "ACATGTGCATGATCCTATAAGT";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna,2,17));
+          
+          // case 5 DNA with ATG, TAA and the substring between them is not a multiple of 3.
+          dna = "ACACATGATGTGATGATCTTAAG";
+          System.out.println(dna);
+          System.out.println(findSimpleGene(dna,4,19));
+    
+        
+    }
+}
