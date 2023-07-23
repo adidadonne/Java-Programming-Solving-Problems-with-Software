@@ -1,0 +1,69 @@
+
+/**
+ * Write a description of part3 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class part3 
+{
+    public boolean twoOccurrences(String stringa, String stringb)
+    {
+        boolean exist = false;
+        int lengthb = stringb.length();
+        int lengtha = stringa.length();
+        int firstIndex = stringb.indexOf(stringa);
+        if(firstIndex != -1)
+        {
+            String newStr=stringb.substring(firstIndex+lengtha-1);
+            if(newStr.indexOf(stringa)!=-1)
+            {
+                exist=true;
+            }
+        }
+        return exist;
+    }
+    
+        public String lastPart(String stringa, String stringb)
+    {
+        int index = stringb.indexOf(stringa);
+        int length = stringa.length();
+        if(index == -1)
+        {
+            return stringb;
+        }
+        return stringb.substring(index+length);
+    }
+    
+    public void testing()
+    {
+      // should return true
+      
+       if( twoOccurrences("by", "A story by Abby Long") )
+       {
+          System.out.println("true"); 
+       }
+       else System.out.println("false"); 
+       
+       
+         // should return true
+       if( twoOccurrences("a", "banana") )
+       {
+          System.out.println("true"); 
+       }
+       else System.out.println("false"); 
+       
+       // should return false
+        if( twoOccurrences("atg", "ctgtatgta") )
+       {
+          System.out.println("true"); 
+       }
+       else System.out.println("false"); 
+       
+       System.out.println("The part of the string after an in banana is " + lastPart("an", "banana"));
+       
+       System.out.println("The part of the string after an in banana is " + lastPart("zoo", "forest"));
+    }
+    
+
+}
