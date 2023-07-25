@@ -11,8 +11,6 @@ public class part1 {
     
     public int findStopCodon(String dna,int startIndex, String stopCodon)
     {
-        // if start index == -1 ?? 
-        
         int currIndex = dna.indexOf(stopCodon,startIndex+3);
         while( currIndex != -1)
         {
@@ -221,7 +219,7 @@ public class part1 {
          {
              //print all the Strings in sr that are longer than 9 characters
               
-             if(s.length() >= 9)
+             if(s.length() > 9)
              {
                  System.out.println("this string is longer than 9 characters : " + s);
                  num_strings_bigger ++;
