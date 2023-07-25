@@ -10,7 +10,7 @@ import edu.duke.*;
 
 public class part4 
 {
-    public void findLinks(String url)
+   /* public void findLinks(String url)
     {
           URLResource urlResource = new URLResource(url);
          
@@ -29,7 +29,29 @@ public class part4
          }
             
         
+    }*/
+
+  public void findLinks(String url)
+    {
+          URLResource urlResource = new URLResource(url);
+         
+         for (String s : urlResource.lines())
+         {
+             //String temp = s;
+            // s.toLowerCase();
+             int indexOfYoutube= s.toLowerCase().indexOf("youtube");
+             if(indexOfYoutube != -1)
+             {
+                 int firstIn = s.lastIndexOf("\"",indexOfYoutube);
+                 int lastIn = s.indexOf("\"", indexOfYoutube+1   );
+         
+                 System.out.println( "youtube link: " +s.substring(firstIn+1,lastIn));
+             }
+         }
+            
+        
     }
+
      public void test() 
      {
         String url = "http://www.dukelearntoprogram.com/course2/data/manylinks.html";
