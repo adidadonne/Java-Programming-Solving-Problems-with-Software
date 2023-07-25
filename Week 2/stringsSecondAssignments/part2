@@ -1,0 +1,46 @@
+
+/**
+ * Write a description of part2 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class part2 {
+    public int howMany(String stringa, String stringb)
+    {
+        int num=0;
+        int index=0;
+        String temp=stringb;
+        
+        while (true)
+        {
+            // find the index of sringa in stringb
+            index= temp.indexOf(stringa);
+            // if string a do not exist in string b, break.
+            if(index == -1)
+           {
+               break;
+           }
+           // count this appearance of string a in string b 
+           num++;
+           // cut this appearance of string a from string b and continue.
+           temp= temp.substring(index+stringa.length());
+        }
+        return num;
+    }
+    
+    public void testHowMany()
+    {
+        String stringa = "GAA";
+        String stringb = "ATGAACGAATTGAATC";
+        int number = howMany(stringa,stringb);
+        System.out.println("the number of occurrences of stringa in string b is " + number);
+        
+        stringa = "TAAT";
+        stringb = "CATAATCCGCTACTTATGG";
+        number = howMany(stringa,stringb);
+        System.out.println("the number of occurrences of stringa in string b is " + number);
+        
+        
+    }
+}
