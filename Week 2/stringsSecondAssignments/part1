@@ -35,7 +35,7 @@ public class part1
     public String findGene(String dna, int startIndex)
     {
         //Find the index of the first occurrence of the start codon “ATG”. If there is no “ATG”, return the empty string
-        //int startIndex = dna.indexOf("ATG");
+        startIndex = dna.indexOf("ATG",startIndex);
         if(startIndex == -1) 
         {
          return "";   
