@@ -195,5 +195,78 @@ public class part1 {
         printGenes(testRes);
         
     }
-    
-}
+   
+
+    public double cgRatio ( String dna)
+    {
+        int num=0;
+        String temp= dna.toUpperCase();
+        for( int i=0; i<dna.length(); i++)
+        {
+            if(temp.charAt(i)== 'C' || temp.charAt(i)== 'G')
+            {
+             num++;   
+            }
+        }
+        return  (double) num/dna.length();
+    }
+     //// * part 3 * ////
+     public void processGenes(StorageResource sr)
+     {
+         
+         int num_strings_bigger = 0;
+         int num_ratio_bigger =0;
+         int max_length =0;
+         for(String s : sr.data())
+         {
+             //print all the Strings in sr that are longer than 9 characters
+              
+             if(s.length() >= 9)
+             {
+                 System.out.println("this string is longer than 9 characters : " + s);
+                 num_strings_bigger ++;
+             }
+            // print the Strings in sr whose C-G-ratio is higher than 0.35
+            if(cgRatio(s) >0.35)
+            {
+                System.out.println("this String C-G_ratio is higher than 0.35 : " + s);
+                num_ratio_bigger ++;
+            }
+            StorageResource all_genes = getAllGenes(s);
+            for(String str : all_genes.data())
+            {
+                if(str.length() > max_length)
+                {
+                    max_length = str.length();
+                }
+            }
+          
+         }     
+          // print the number of Strings in sr that are longer than 9 characters
+             System.out.println(" this is the number of Strings in sr that are longer than 9 characters : " +num_strings_bigger);
+             //print the number of strings in sr whose C-G-ratio is higher than 0.35
+             System.out.println("this is the number of strings in sr whose C-G-ratio is higher than 0.35: " +num_ratio_bigger);
+             
+             //print the length of the longest gene in sr
+             System.out.println("this is the length of the longest gene in sr is : " + max_length);
+     }
+     public void testProcessGenes()
+     {
+         StorageResource sr = new StorageResource();
+         // case 1 - These should include: one DNA string that has some genes longer than 9 characters
+         sr.add("AAATGCTCGGATTCTAAG");
+         
+         // case 2 - one DNA string that has no genes longer than 9 characters
+         sr.add("AAAATGTGAATGTAGG");
+         // case 3 - one DNA string that has some genes whose C-G-ratio is higher than 0.35
+         sr.add("ATGGCGTGA");
+         //case 4 - and one DNA string that has some genes whose C-G-ratio is lower than 0.35
+         sr.add("ATGTATTAA");
+         //case 5 - 
+         
+         processGenes(sr);
+     }
+    }
+
+
+ 
