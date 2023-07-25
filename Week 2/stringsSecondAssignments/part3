@@ -62,6 +62,11 @@ public class part3 {
         {
             return "";
         }
+               // if there is no stop codons
+            if(minIndex == dna.length())
+            {
+                return "";  
+            }
        return dna.substring(startIndex,minIndex+3);
            
     }
@@ -104,11 +109,5 @@ public class part3 {
     {
            String dna = "ATGCCCTAAGATGCCCTAGT";
         System.out.println("Gene count on " + dna + " = " + countGenes(dna));
-    }
-    
-    
-    
-    
-    
-    
+    } 
 }
