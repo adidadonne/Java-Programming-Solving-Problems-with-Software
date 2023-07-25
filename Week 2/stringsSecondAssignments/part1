@@ -1,0 +1,135 @@
+
+/**
+ * Write a description of part1 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class part1 
+{
+    public int findStopCodon(String dna,int startIndex, String stopCodon)
+    {
+        // if start index == -1 ?? 
+        
+        int currIndex = dna.indexOf(stopCodon,startIndex+3);
+        while( currIndex != -1)
+        {
+            if( (currIndex-startIndex) %3 ==0)
+            {
+                return currIndex;
+            }
+            currIndex= dna.indexOf(stopCodon,currIndex+1);
+        }
+  
+        // If there is no such stopCodon, this method returns the length of the dna strand.
+        return dna.length();
+    }
+    public void testFindStopCodon()
+    {
+        String dna = "xxxxzzzyyyTAAxxxgggttTAAxx";
+        int dex= findStopCodon(dna,0, "TAA");
+        
+        /// need to finish writing tests
+    }
+    
+    public String findGene(String dna, int startIndex)
+    {
+        //Find the index of the first occurrence of the start codon “ATG”. If there is no “ATG”, return the empty string
+        //int startIndex = dna.indexOf("ATG");
+        if(startIndex == -1) 
+        {
+         return "";   
+        }
+        /*Find the index of the first occurrence of the stop codon “TAA” after the first occurrence of 
+         * “ATG” that is a multiple of three away from the “ATG”. Hint: call findStopCodon.*/
+         int indexTAA= findStopCodon(dna, startIndex, "TAA");
+         
+         /* Find the index of the first occurrence of the stop codon “TAG” after the first occurrence of “ATG” that is a multiple of three away from the “ATG”.*/
+         int indexTAG = findStopCodon(dna, startIndex, "TAG");
+          /* Find the index of the first occurrence of the stop codon “TGA” after the first occurrence of “ATG” that is a multiple of three away from the “ATG”. */
+         int indexTGA = findStopCodon(dna, startIndex, "TGA");
+          /*Return the gene formed from the “ATG” and the closest stop codon that is a multiple of three away. 
+           * find the minimum valid (non -1) stop codon
+           */
+          int minIndex=0;
+          if(indexTAA== -1 ||( indexTGA != -1 && indexTGA < indexTAA))
+          {
+              minIndex=indexTGA;
+          }
+          else 
+          {
+              minIndex=indexTAA;
+          }
+          
+          if(minIndex ==-1 ||(indexTAG != -1 && indexTAG<minIndex))
+          {
+             minIndex=indexTAG; 
+          }
+              /* If there is no valid stop codon and therefore no gene, return the empty string*/ 
+        if(minIndex == -1) 
+        {
+            return "";
+        }
+       return dna.substring(startIndex,minIndex+3);
+           
+    }
+    
+    
+    
+    /////////// NEED TO FINISH //////////
+    public void  testFindGene()
+    {
+        //DNA with no “ATG”,
+        String dna = "ATCCTACCCGTTTAGCGC";
+        System.out.println(dna);
+        System.out.println("test for DNA with no “ATG”");
+        String gene = findGene(dna,0);
+        System.out.println(gene);
+        
+        //DNA with “ATG” and one valid stop codon
+        dna = "ATGCCTGATCCATAGA" ;
+        System.out.println(dna);
+        System.out.println("test for DNA with “ATG” and one valid stop codon");
+        gene = findGene(dna,0);
+        System.out.println(gene);
+        
+        //DNA with “ATG” and multiple valid stop codons
+        dna = "ATGCCTGATCCATAGATCTTAG" ;
+        System.out.println(dna);
+        System.out.println("test for DNA with “ATG” and multiple valid stop codons");
+        gene = findGene(dna,0);
+        System.out.println(gene);
+        
+        //DNA with “ATG” and no valid stop codons
+        dna = "ATGCTGATCCATAGATCTTG" ;
+        System.out.println(dna);
+        System.out.println("test for DNA with “ATG” and no valid stop codons");
+        gene = findGene(dna,0);
+        System.out.println(gene);
+        
+        //DNA with “ATG” not at place 0 and one valid stop codon
+        dna = "AAAATGCTGATCCATAGATCTTGTTTAGG" ;
+        System.out.println(dna);
+        System.out.println("test for DNA with “ATG” not at place 0 and one valid stop codon");
+        gene = findGene(dna,0);
+        System.out.println(gene);
+    }
+    
+    public void printAllGenes (String dna)
+    {
+        int startIndex = 0 ;
+        while (true)
+        {
+            String currentGene = findGene(dna,startIndex);
+            if(currentGene.isEmpty())
+            {
+                break;
+            }
+            System.out.println(currentGene);
+            startIndex=dna.indexOf(currentGene,startIndex)+currentGene.length();
+            
+        }
+     
+    }
+}
+
