@@ -34,7 +34,7 @@ public class part3 {
     
     public String findGene(String dna, int startIndex)
     {
-       
+        startIndex = dna.indexOf("ATG",startIndex);
         if(startIndex == -1) 
         {
          return "";   
