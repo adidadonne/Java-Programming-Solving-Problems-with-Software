@@ -9,15 +9,15 @@ public class part1
 {
     public int findStopCodon(String dna,int startIndex, String stopCodon)
     {
-        // if start index == -1 ?? 
-        
         int currIndex = dna.indexOf(stopCodon,startIndex+3);
+        
         while( currIndex != -1)
         {
             if( (currIndex-startIndex) %3 ==0)
             {
                 return currIndex;
             }
+           
             currIndex= dna.indexOf(stopCodon,currIndex+1);
         }
   
@@ -28,7 +28,7 @@ public class part1
     {
         String dna = "xxxxzzzyyyTAAxxxgggttTAAxx";
         int dex= findStopCodon(dna,0, "TAA");
-        
+        System.out.println("m");
         /// need to finish writing tests
     }
     
@@ -69,6 +69,11 @@ public class part1
         if(minIndex == -1) 
         {
             return "";
+        }
+        // if there is no stop codons
+        if(minIndex == dna.length())
+        {
+            return "";  
         }
        return dna.substring(startIndex,minIndex+3);
            
