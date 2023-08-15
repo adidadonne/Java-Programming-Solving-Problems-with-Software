@@ -6,7 +6,7 @@
  * @version (a version number or a date)
  */
 
-'''
+'''ruby
 
 import edu.duke.*;
 import org.apache.commons.csv.*;
